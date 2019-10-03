@@ -9,6 +9,11 @@ const dictionaryPath = 'assets/dictionary.json';
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
+obfuscate(sourcePath, outputObfuscatedPath, dictionaryPath).then(() => {
+    deobfuscate(outputObfuscatedPath, outputDeobfuscatedPath, dictionaryPath);
+});
+
+// Logic 
 async function obfuscate(sourcePath, outputPath, dictionaryPath) {
     let code = await readFileAsync(sourcePath, 'utf8');
     const data = await readFileAsync(dictionaryPath);
@@ -16,11 +21,11 @@ async function obfuscate(sourcePath, outputPath, dictionaryPath) {
 
     // obfuscation
     code = removeSpaces(code);
-    code = makeInvisible(code);
     // Object.keys(dict).forEach(key => {
     //     code = code.replace(key, dict[key]);
     // });
 
+    // code = makeInvisible(code);
     await writeFileAsync(outputPath, code);
 }
 
@@ -32,22 +37,21 @@ async function deobfuscate(sourcePath, outputPath, dictionaryPath) {
     // Object.keys(dict).forEach(key => {
     //     code = code.replace(dict[key], key);
     // });
-    code = makeVisible(code);
 
+    // code = makeVisible(code);
     await writeFileAsync(outputPath, code);
 }
 
-obfuscate(sourcePath, outputObfuscatedPath, dictionaryPath).then(() => {
-    deobfuscate(outputObfuscatedPath, outputDeobfuscatedPath, dictionaryPath);
-});
-
 function removeSpaces(code) {
-    return code.replace(/(\W+?)\s+(\W+?)/g, '$1$2');
+    // code = code.replace(/(\W)\s+(\W)/g, '$1$2');
+    code = code.replace(/(\W?)\s+(\W)/g, '$1$2');
+    code = code.replace(/(\W)\s+(\W?)/g, '$1$2');
+    return code;
 }
 
 function makeInvisible(visibleCode) {
     let result = '';
-    
+
     for (let symbol of visibleCode) {
         binary = symbol.charCodeAt(0).toString(2);
         binary = binary.padStart(8, ' ');
