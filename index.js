@@ -1,9 +1,9 @@
 var fs = require('fs');
 const util = require('util');
 
-const sourcePath = 'assets/test.js';
-const outputObfuscatedPath = 'assets/output/obfuscated/test.js';
-const outputDeobfuscatedPath = 'assets/output/deobfuscated/test.js';
+const sourcePath = 'assets/test-variables.js';
+const outputObfuscatedPath = 'assets/output/obfuscated/test-variables.js';
+const outputDeobfuscatedPath = 'assets/output/deobfuscated/test-variables.js';
 const dictionaryPath = 'assets/dictionary.json';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -44,9 +44,13 @@ async function deobfuscate(sourcePath, outputPath, dictionaryPath) {
 
 function removeSpaces(code) {
     // code = code.replace(/(\W)\s+(\W)/g, '$1$2');
-    code = code.replace(/(\W?)\s+(\W)/g, '$1$2');
-    code = code.replace(/(\W)\s+(\W?)/g, '$1$2');
+    code = code.replace(/([\W]?)\s+([\W])/g, '$1$2');
+    code = code.replace(/([\W])\s+([\W]?)/g, '$1$2');
     return code;
+}
+
+function replaceVariablesNames(code) {
+    
 }
 
 function makeInvisible(visibleCode) {
