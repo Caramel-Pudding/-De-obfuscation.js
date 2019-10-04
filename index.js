@@ -2,8 +2,8 @@ var fs = require('fs');
 const util = require('util');
 
 const sourcePath = 'assets/test.js';
-const outputObfuscatedPath = 'assets/obfuscated/test.js';
-const outputDeobfuscatedPath = 'assets/deobfuscated/test.js';
+const outputObfuscatedPath = 'assets/output/obfuscated/test.js';
+const outputDeobfuscatedPath = 'assets/output/deobfuscated/test.js';
 const dictionaryPath = 'assets/dictionary.json';
 
 const readFileAsync = util.promisify(fs.readFile);
