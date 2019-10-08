@@ -1,9 +1,11 @@
 var fs = require('fs');
 const util = require('util');
 
-const sourcePath = 'assets/test-variables.js';
-const outputObfuscatedPath = 'assets/output/obfuscated/test-variables.js';
-const outputDeobfuscatedPath = 'assets/output/deobfuscated/test-variables.js';
+const filename = 'test';
+
+const sourcePath = `assets/tests/${filename}.js`;
+const outputObfuscatedPath = `assets/output/obfuscated/${filename}-ob.js`;
+const outputDeobfuscatedPath = `assets/output/deobfuscated/${filename}-deob.js`;
 const dictionaryPath = 'assets/dictionary.json';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -15,6 +17,7 @@ obfuscate(sourcePath, outputObfuscatedPath, dictionaryPath).then(() => {
 
 // Logic 
 async function obfuscate(sourcePath, outputPath, dictionaryPath) {
+    
     let code = await readFileAsync(sourcePath, 'utf8');
     const data = await readFileAsync(dictionaryPath);
     const dict = JSON.parse(data);
@@ -44,8 +47,9 @@ async function deobfuscate(sourcePath, outputPath, dictionaryPath) {
 
 function removeSpaces(code) {
     // code = code.replace(/(\W)\s+(\W)/g, '$1$2');
-    code = code.replace(/([\W]?)\s+([\W])/g, '$1$2');
-    code = code.replace(/([\W])\s+([\W]?)/g, '$1$2');
+    code = code.replace(/ +$/gm, '');
+    code = code.replace(/([^\w\s"']?)\s+([^\w\s"'])/g, '$1$2');
+    code = code.replace(/([^\w\s"'])\s+([^\w\s"']?)/g, '$1$2');
     return code;
 }
 
