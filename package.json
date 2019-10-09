@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "obfuscate": "node obfuscate.js",
+    "deobfuscate": "node deobfuscate.js",
     "check": "node assets/deobfuscated/test.js" 
   },
   "author": "",
