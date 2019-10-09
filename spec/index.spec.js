@@ -58,7 +58,7 @@ describe('Tests', () => {
     });
 
     describe('Deobfuscated code', () => {
-        it("should run without errors", (done) => {
+        it("should run without errors (if not-obfuscated too)", (done) => {
             runScript(outputDeobfuscatedPath, (error) => {
                 expect(error).toBe(null);
                 done();
