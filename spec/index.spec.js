@@ -40,12 +40,16 @@ describe('Tests', () => {
 
     let obfuscatedCode;
     let deobfuscatedCode;
+    let notObfuscatedCode;
 
     beforeAll(() =>
-        obfuscate(sourcePath, outputObfuscatedPath, dictionaryPath).then((obfuscated) => {
+        obfuscate.obfuscate(sourcePath, outputObfuscatedPath, dictionaryPath).then((obfuscated) => {
             obfuscatedCode = obfuscated;
             return deobfuscate(outputObfuscatedPath, outputDeobfuscatedPath, dictionaryPath).then(deobfuscated => {
                 deobfuscatedCode = deobfuscated;
+                return readFileAsync(sourcePath, '').then(code => {
+                    notObfuscatedCode = code.toString();
+                });
             });
         })
     );
@@ -54,6 +58,13 @@ describe('Tests', () => {
         it("contains only spaces and \\n", () => {
             const result = obfuscatedCode.replace(/ /g, '').replace(/\n/g, '');
             expect(result).toBe('');
+        });
+
+        it("should run without errors", (done) => {
+            runScript(outputObfuscatedPath, (error) => {
+                expect(error).toBe(null);
+                done();
+            })
         });
     });
 
@@ -64,6 +75,13 @@ describe('Tests', () => {
                 done();
             })
         });
+
+        it("should be like not-obfuscated without spaces", () => {
+            const codeWithoutSpaces = obfuscate.removeSpaces(notObfuscatedCode);
+            expect(deobfuscatedCode).toBe(codeWithoutSpaces);
+        });
+
     });
+
 });
 

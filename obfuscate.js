@@ -22,7 +22,6 @@ async function obfuscate(sourcePath, outputPath, dictionaryPath) {
 }
 
 function removeSpaces(code) {
-    // code = code.replace(/(\W)\s+(\W)/g, '$1$2');
     code = code.replace(/ +$/gm, '');
     code = code.replace(/([^\w\s"']?)\s+([^\w\s"'])/g, '$1$2');
     code = code.replace(/([^\w\s"'])\s+([^\w\s"']?)/g, '$1$2');
@@ -42,4 +41,5 @@ function makeInvisible(visibleCode) {
     return result;
 }
 
-module.exports = obfuscate;
+module.exports.obfuscate = obfuscate;
+module.exports.removeSpaces = removeSpaces;
