@@ -14,6 +14,7 @@ async function deobfuscate(sourcePath, outputPath, dictionaryPath) {
         code = code.replace(dict[key], key);
     });
     await writeFileAsync(outputPath, code);
+    return code;
 }
 
 function makeVisible(invisibleCode) {

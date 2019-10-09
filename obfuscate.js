@@ -18,6 +18,7 @@ async function obfuscate(sourcePath, outputPath, dictionaryPath) {
     });
     code = makeInvisible(code);
     await writeFileAsync(outputPath, code);
+    return code;
 }
 
 function removeSpaces(code) {
