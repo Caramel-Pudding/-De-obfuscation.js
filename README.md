@@ -10,5 +10,5 @@
 ```npm start deobfuscate```
 
 
-### You should place tested file to folder "assets/tests" and name it "test.js"
+### You should place testing file to folder "assets/tests" and name it "test.js"
 ### Your dictionary should be placed to folder "assets"
