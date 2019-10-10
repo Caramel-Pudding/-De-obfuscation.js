@@ -1,19 +1,15 @@
-const util = require('util');
-const fs = require('fs');
-
-const readFileAsync = util.promisify(fs.readFile);
-const writeFileAsync = util.promisify(fs.writeFile);
+const shared = require('./shared');
 
 async function deobfuscate(sourcePath, outputPath, dictionaryPath) {
-    let code = await readFileAsync(sourcePath, 'utf8');
-    const data = await readFileAsync(dictionaryPath);
+    let code = await shared.readFileAsync(sourcePath, 'utf8');
+    const data = await shared.readFileAsync(dictionaryPath);
 
     const dict = JSON.parse(data);
     code = makeVisible(code);
     Object.keys(dict).forEach(key => {
         code = code.replace(dict[key], key);
     });
-    await writeFileAsync(outputPath, code);
+    await shared.writeFileAsync(outputPath, code);
     return code;
 }
 
@@ -28,5 +24,7 @@ function makeVisible(invisibleCode) {
     }
     return result;
 }
+
+deobfuscate(shared.sourcePathDeobfuscation, shared.outputDeobfuscatedPath, shared.dictionaryPath);
 
 module.exports = deobfuscate;
