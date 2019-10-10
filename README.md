@@ -10,5 +10,5 @@
 ```npm start deobfuscate```
 
 
-### You should place tested file to folder "assets/tests" and name it "test.js"
-### Your dictionary should be placed to folder "assets"
+### You should place file that you want to obfuscate/deobfuscate to folder "assets/obfuscation (deobfuscation)" and name it "test.js"
+### Your dictionary should be placed to folder "assets" with name "dictionary.json"
