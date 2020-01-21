@@ -8,8 +8,8 @@ const filename = 'test';
 
 const sourcePathObfuscation = `assets/obfuscation/${filename}.js`;
 const sourcePathDeobfuscation = `assets/deobfuscation/${filename}.js`;
-const outputObfuscatedPath = `assets/output/obfuscated/${filename}-ob.js`;
-const outputDeobfuscatedPath = `assets/output/deobfuscated/${filename}-deob.js`;
+const outputObfuscatedPath = `assets/obfuscation/output/obfuscated/${filename}-ob.js`;
+const outputDeobfuscatedPath = `assets/obfuscation/output/deobfuscated/${filename}-deob.js`;
 const dictionaryPath = 'assets/dictionary.json';
 
 module.exports.readFileAsync = readFileAsync;

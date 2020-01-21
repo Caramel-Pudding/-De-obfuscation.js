@@ -7,7 +7,7 @@
     "test": "node node_modules/jasmine/bin/jasmine",
     "obfuscate": "node obfuscate.js",
     "deobfuscate": "node deobfuscate.js",
-    "check": "node assets/deobfuscated/test.js"
+    "check": "node assets/deobfuscation/test.js"
   },
   "dependencies": {
     "jasmine": "3.5.0"

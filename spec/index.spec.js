@@ -7,8 +7,8 @@ const shared = require('../shared');
 const filename = 'test';
 
 const sourcePath = `assets/obfuscation/${filename}.js`;
-const outputObfuscatedPath = `assets/output/obfuscated/${filename}-ob.js`;
-const outputDeobfuscatedPath = `assets/output/deobfuscated/${filename}-deob.js`;
+const outputObfuscatedPath = `assets/obfuscation/output/obfuscated/${filename}-ob.js`;
+const outputDeobfuscatedPath = `assets/obfuscation/output/deobfuscated/${filename}-deob.js`;
 const dictionaryPath = 'assets/dictionary.json';
 
 // function for running scripts
